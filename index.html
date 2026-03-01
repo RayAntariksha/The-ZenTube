@@ -21,21 +21,21 @@
 
     <script>
         let allVideos = [];
-        
+
         // 1. Load the data
         async function init() {
             try {
                 const response = await fetch('Database.txt');
                 const text = await response.text();
-                
+
                 allVideos = text.split('\n')
-                .filter(line => line.includes('|'))
-                .map(line => {
-                    const [id, ...titleParts] = line.split('|');
+                    .filter(line => line.includes('|'))
+                    .map(line => {
+                        const [id, ...titleParts] = line.split('|');
                         return { id: id.trim(), title: titleParts.join('|').trim() };
                     });
 
-                    // Show 12 random videos to start
+                // Show 12 random videos to start
                 showVideos(shuffle([...allVideos]).slice(0, 12));
             } catch (e) {
                 document.getElementById('videoGrid').innerHTML = "Error loading videos.txt";
@@ -45,7 +45,7 @@
         function shuffle(array) {
             return array.sort(() => Math.random() - 0.5);
         }
-        
+
         // 2. Render Videos
         function showVideos(videos) {
             const grid = document.getElementById('videoGrid');
@@ -60,8 +60,8 @@
                         </div>
                         </div>
                         `).join('');
-                    }
-                    
+        }
+
         // 3. Search Logic
         function handleSearch() {
             const query = document.getElementById('searchBar').value.toLowerCase();
@@ -82,9 +82,9 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; **fullscreen**" 
             allowfullscreen></iframe>`;
         }
-        
+
         init();
-        </script>
+    </script>
     <footer>
         <p>Copyright &copy; 2026 Antariksha Ray</p>
     </footer>
